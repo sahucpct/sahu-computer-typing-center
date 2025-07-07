@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>MCQ Quiz - Sahu Computer Typing Center</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+    .quiz-container { max-width: 800px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; }
+    h2 { color: #333; }
+    .question { margin-bottom: 15px; }
+    .options label { display: block; margin: 5px 0; }
+    .result { font-weight: bold; margin-top: 20px; }
+    button { padding: 10px 15px; margin-top: 10px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2>MCQ Quiz - सामान्य विज्ञान</h2>
+    <form id="quizForm">
+      <div id="quizContent"></div>
+      <button type="button" onclick="submitQuiz()">Submit</button>
+    </form>
+    <div class="result" id="resultBox"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        q: "1) वह धातु जो कमरे के ताप पर द्रव अवस्था में प्राप्त होती है",
+        options: ["मरकरी", "स्केन्डियम", "क्लोरीन", "ब्रोमीन"],
+        answer: 0
+      },
+      {
+        q: "2) परमाणु क्रमांक 20 वाले तत्व को आवर्त सारणी के किस आवर्त में रखा जाएगा?",
+        options: ["5", "4", "3", "2"],
+        answer: 1
+      },
+      {
+        q: "3) समूह 18 के तत्वों को कहा जाता है",
+        options: ["क्षार धातु", "क्षारीय भू-धातु", "हैलोजन्स", "अक्रिय गैस"],
+        answer: 3
+      },
+      {
+        q: "4) पीरियड में बाँए से दाँए संचलन करते समय इलेक्ट्रॉन बन्धुता-",
+        options: ["कम हो जाती है", "बढ़ जाती है", "समान रहती है", "शून्य हो जाती है"],
+        answer: 1
+      },
+      {
+        q: "5) निम्न में से किस धातु को चाकू द्वारा आसानी से काटा नहीं जा सकता है?",
+        options: ["एल्युमीनियम", "सोडियम", "पोटेशियम", "लीथियम"],
+        answer: 0
+      },
+      {
+        q: "6) किसने यह खोजा कि हर आठवें तत्व के गुण, पहले के समान हैं?",
+        options: ["न्यूलैंड", "मोजले", "डोबरीनर", "मेड़लीव"],
+        answer: 0
+      },
+      {
+        q: "7) डॉबेराइनर ने तीन तत्वों के समूह की पहचान कर उन्हें क्या नाम दिया?",
+        options: ["ट्रायड (त्रिक)", "थाइस", "टेट्राड", "ट्रिटियम"],
+        answer: 0
+      },
+      {
+        q: "8) निम्नलिखित 'ट्रायड में से कौन-सा एक, डोबरेनर ट्रायड का प्रतिनिधित्व करता है?",
+        options: ["Li, Na, K", "Li, Ca, Cl", "Na, Sr, Br", "Li, K, Na"],
+        answer: 0
+      },
+      {
+        q: "9) यह नियम कि जब तत्वों को परमाणु भारों के बढ़ते क्रम में व्यवस्थित किया जाता है...",
+        options: ["मेंडलीव के नियम", "न्यूटन का नियम", "न्यूलैंड का अष्टक नियम", "डॉबेराइनर के त्रिक का नियम"],
+        answer: 3
+      },
+      {
+        q: "10) डॉबराइनर ने उत्प्रेरक के रूप में पर पहला अवलोकन किया।",
+        options: ["Au", "Ni", "Pt", "Ag"],
+        answer: 2
+      },
+      {
+        q: "11) सन......... में, न्यूलैंड्स ने तत्वों की व्यवस्था की।",
+        options: ["1860", "1964", "1844", "1864"],
+        answer: 3
+      },
+      {
+        q: "12) आवर्त सारणी का आविष्कार किसने किया?",
+        options: ["दिमित्री मेंडलीव", "लुई पाश्चर", "मैरी क्यूरी", "एंटोनी लेबोजियर"],
+        answer: 0
+      }
+    ];
+
+    const quizDiv = document.getElementById("quizContent");
+
+    questions.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.classList.add("question");
+      div.innerHTML = `<strong>${item.q}</strong><div class="options">` +
+        item.options.map((opt, i) => `
+          <label>
+            <input type="radio" name="q${index}" value="${i}"> ${opt}
+          </label>`).join('') +
+        `</div>`;
+      quizDiv.appendChild(div);
+    });
+
+    function submitQuiz() {
+      let score = 0;
+      questions.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected && parseInt(selected.value) === q.answer) {
+          score++;
+        }
+      });
+      document.getElementById("resultBox").innerText = `आपका स्कोर: ${score} / ${questions.length}`;
+    }
+  </script>
+</body>
+</html>
